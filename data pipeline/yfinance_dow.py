@@ -9,7 +9,6 @@ df = pd.read_html('https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average')[
 tickers = df.Symbol.to_list()
 
 
-
 #Output stock info to csv with yfinance
 tickerStrings = tickers
 df_list = list()
