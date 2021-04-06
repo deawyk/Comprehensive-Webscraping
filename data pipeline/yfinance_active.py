@@ -13,8 +13,6 @@ symbols = list()
 for item in soup.select('.simpTblRow'):
     symbols.append(item.select('[aria-label=Symbol]')[0].get_text())
 
-
-
 #Output stock info to csv with yfinance
 tickerStrings = symbols
 df_list = list()
