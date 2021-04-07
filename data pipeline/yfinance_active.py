@@ -14,7 +14,11 @@ for item in soup.select('.simpTblRow'):
     symbols.append(item.select('[aria-label=Symbol]')[0].get_text())
 
 #Output stock info to csv with yfinance
-tickerStrings = symbols
+
+stockinfo_to_csv(symbols, 'ticker_active.csv')
+
+def stockinfo_to_csv (tickerStrings, file_name):
+tickerStrings = 
 df_list = list()
 for ticker in tickerStrings:
     data = yf.download(ticker, group_by="Ticker", period='5y')
@@ -25,4 +29,4 @@ for ticker in tickerStrings:
 df = pd.concat(df_list)
 
 #save to csv
-df.to_csv('ticker_active.csv')
+df.to_csv(file_name)
