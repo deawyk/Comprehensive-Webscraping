@@ -2,7 +2,7 @@
 import yfinance as yf
 import pandas as pd
 
-def stockinfo_to_csv (tickerStrings, file_name):
+def stock_info_to_csv (tickerStrings, file_name):
     df_list = list()
     for ticker in tickerStrings:
         data = yf.download(ticker, group_by="Ticker", period='5y')
