@@ -22,3 +22,4 @@ df = pd.concat(df_list)
 
 #save to csv
 df.to_csv('ticker_dow.csv')
+
