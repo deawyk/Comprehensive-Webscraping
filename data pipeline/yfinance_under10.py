@@ -37,17 +37,5 @@ new_results = [company(*i) for i in final_results]
 #grab tickers into a list
 abbrevs = [i.abbreviation for i in new_results]
 
-
 #Output stock info to csv with yfinance
-tickerStrings = abbrevs
-df_list = list()
-for ticker in tickerStrings:
-    data = yf.download(ticker, group_by="Ticker", period='5y')
-    data['Ticker'] = ticker  #add column with ticker
-    df_list.append(data)
-
-#combine all dataframes into a single dataframe
-df = pd.concat(df_list)
-
-#save to csv
-df.to_csv('ticker_under10.csv')
+stock_info_to_csv(abbrevs, 'ticker_under10.csv')
