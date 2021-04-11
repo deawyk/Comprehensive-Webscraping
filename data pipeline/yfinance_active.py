@@ -1,3 +1,7 @@
+#Function
+import yfinance as yf
+import pandas as pd
+
 def stockinfo_to_csv (tickerStrings, file_name):
     df_list = list()
     for ticker in tickerStrings:
@@ -11,6 +15,8 @@ def stockinfo_to_csv (tickerStrings, file_name):
     #save to csv
     df.to_csv(file_name)
 
+    
+    
 #Webscraping Yahoo! Finance-Most Active Stocks with Beautiful Soup
 from bs4 import BeautifulSoup
 import requests
@@ -27,4 +33,16 @@ for item in soup.select('.simpTblRow'):
     symbols.append(item.select('[aria-label=Symbol]')[0].get_text())
 
 #Output stock info to csv with yfinance
-stockinfo_to_csv(symbols, 'ticker_active.csv')
+stock_info_to_csv(symbols, 'ticker_active.csv')
+
+
+
+#DOW 30 dataframe from wikipedia
+df = pd.read_html('https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average')[1]
+#grab tickers into a list
+tickers = df.Symbol.to_list()
+
+#Output stock info to csv with yfinance
+stock_info_to_csv(tickers, 'ticker_dow.csv')
+
+
