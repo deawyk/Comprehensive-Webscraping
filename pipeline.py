@@ -1,4 +1,3 @@
-#Function
 import yfinance as yf
 import pandas as pd
 from selenium import webdriver
@@ -7,7 +6,7 @@ from bs4 import BeautifulSoup as soup
 import re
 import requests
 
-#Action
+#Function
 def stock_info_to_csv (tickerStrings, file_name):
     df_list = list()
     for ticker in tickerStrings:
