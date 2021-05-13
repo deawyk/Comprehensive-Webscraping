@@ -1,7 +1,14 @@
 #Function
 import yfinance as yf
 import pandas as pd
+from selenium import webdriver
+import collections
+from bs4 import BeautifulSoup as soup
+import re
+from bs4 import BeautifulSoup
+import requests
 
+#Action
 def stock_info_to_csv (tickerStrings, file_name):
     df_list = list()
     for ticker in tickerStrings:
@@ -16,12 +23,7 @@ def stock_info_to_csv (tickerStrings, file_name):
     df.to_csv(file_name)
 
     
-#Comprehensive webscrape of U.S. News-Stocks Under $10 with Selenium
-from selenium import webdriver
-import collections
-from bs4 import BeautifulSoup as soup
-import re
-
+#Webscrape of U.S. News-Stocks Under $10 with Selenium and Regex
 #download chromedriver
 d = webdriver.Chrome('/Users/owner/chromedriver')
 d.get('https://money.usnews.com/investing/stocks/stocks-under-10')
@@ -55,14 +57,8 @@ new_results = [company(*i) for i in final_results]
 #grab tickers into a list
 abbrevs = [i.abbreviation for i in new_results]
 
-#Output stock info to csv with yfinance
-stock_info_to_csv(abbrevs, 'ticker_under10.csv')
 
-
-#Webscraping Yahoo! Finance-Most Active Stocks with Beautiful Soup
-from bs4 import BeautifulSoup
-import requests
-
+#Webscrape Yahoo! Finance-Most Active Stocks with BeautifulSoup
 url = 'https://finance.yahoo.com/most-active'
 header = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9'
          }
@@ -74,16 +70,17 @@ symbols = list()
 for item in soup.select('.simpTblRow'):
     symbols.append(item.select('[aria-label=Symbol]')[0].get_text())
 
-#Output stock info to csv with yfinance
-stock_info_to_csv(symbols, 'ticker_active.csv')
 
-
-#DOW 30 dataframe from wikipedia
+#Websrape Wikipedia for DOW 30 Symbols
 df = pd.read_html('https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average')[1]
 #grab tickers into a list
 tickers = df.Symbol.to_list()
 
-#Output stock info to csv with yfinance
+
+#Output stock info to csv
+#US New's stocks under $10
+stock_info_to_csv(abbrevs, 'ticker_under10.csv')
+#Yahoo's most active stocks
+stock_info_to_csv(symbols, 'ticker_active.csv')
+#DOW 30
 stock_info_to_csv(tickers, 'ticker_dow.csv')
-
-
