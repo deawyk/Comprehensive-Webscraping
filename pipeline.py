@@ -5,7 +5,6 @@ from selenium import webdriver
 import collections
 from bs4 import BeautifulSoup as soup
 import re
-from bs4 import BeautifulSoup
 import requests
 
 #Action
