@@ -19,7 +19,6 @@ def stock_info_to_csv (tickerStrings, file_name):
     
     #save to csv
     df.to_csv(file_name)
-
     
 #Webscrape of U.S. News-Stocks Under $10 with Selenium and Regex
 #download chromedriver
@@ -68,7 +67,7 @@ symbols = list()
 for item in soup.select('.simpTblRow'):
     symbols.append(item.select('[aria-label=Symbol]')[0].get_text())
 
-
+    
 #Websrape Wikipedia for DOW 30 Symbols
 df = pd.read_html('https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average')[1]
 #grab tickers into a list
